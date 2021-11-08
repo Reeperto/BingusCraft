@@ -1,0 +1,32 @@
+{
+    "record.jigsaw":
+    {
+        "sounds":
+        [
+            {
+                "name": "jigsaw",
+                "stream": true
+            }
+        ]
+    },
+    "record.adults":
+    {
+        "sounds":
+        [
+            {
+                "name": "adults",
+                "stream": true
+            }
+        ]
+    },
+    "record.new":
+    {
+        "sounds":
+        [
+            {
+                "name": "new",
+                "stream": true
+            }
+        ]
+    }
+}

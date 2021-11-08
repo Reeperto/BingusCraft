@@ -1,0 +1,28 @@
+{
+    "comment1": "NO NEED TO CHANGE",
+    "item.custom_discs.music_disc_end.desc": "C418 - Alpha",
+    "record.nowPlaying.alpha": "Now Playing: C418 - Alpha",
+    "item.custom_discs.portable_jukebox": "Portable Jukebox",
+    "item.custom_discs.portable_jukebox.desc": "Immersive music world!",
+    "record.portable_jukebox.vanilla.13": "Now Playing: C418 - 13",
+    "record.portable_jukebox.vanilla.cat": "Now Playing: C418 - cat",
+    "record.portable_jukebox.vanilla.blocks": "Now Playing: C418 - blocks",
+    "record.portable_jukebox.vanilla.chirp": "Now Playing: C418 - chirp",
+    "record.portable_jukebox.vanilla.far": "Now Playing: C418 - far",
+    "record.portable_jukebox.vanilla.mall": "Now Playing: C418 - mall",
+    "record.portable_jukebox.vanilla.mellohi": "Now Playing: C418 - mellohi",
+    "record.portable_jukebox.vanilla.stal": "Now Playing: C418 - stal",
+    "record.portable_jukebox.vanilla.strad": "Now Playing: C418 - strad",
+    "record.portable_jukebox.vanilla.ward": "Now Playing: C418 - ward",
+    "record.portable_jukebox.vanilla.11": "Now Playing: C418 - 11",
+    "record.portable_jukebox.vanilla.wait": "Now Playing: C418 - wait",
+    "record.portable_jukebox.vanilla.pigstep": "Now Playing: Lena Raine - Pigstep",
+
+
+    "comment2": "[CUSTOM REALM]",
+    "item.custom_discs.music_disc_jigsaw.desc": "Radiohead - Jigsaw Falling Into Place",
+    "record.nowPlaying.jigsaw": "Now Playing: Jigsaw Falling Into Place",
+
+    "item.custom_discs.music_disc_adults.desc": "The Strokes - The Adults Are Talking",
+    "record.nowPlaying.adults": "Now Playing: The Adults Are Talking"
+}
