@@ -19,6 +19,16 @@
             }
         ]
     },
+    "record.little":
+    {
+        "sounds":
+        [
+            {
+                "name": "little",
+                "stream": true
+            }
+        ]
+    },
     "record.new":
     {
         "sounds":
