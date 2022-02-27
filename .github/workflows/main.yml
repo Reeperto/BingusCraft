@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Create Archive
+name: Create Archive and Hash
 
 # Controls when the workflow will run
 on:
@@ -24,9 +24,12 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig README.md'
+        exclusions: '*.git* /*node_modules/* .editorconfig README.md hash.txt'
     - name: push changes to remote
       run: |
         git add -A
         git commit -m "New pack"
         git push --force
+    - name: Put hash inside text file
+      run: |
+        shasum -a 1 release.zip > hash.txt
