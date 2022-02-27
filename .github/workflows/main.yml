@@ -25,11 +25,11 @@ jobs:
       with:
         filename: 'release.zip'
         exclusions: '*.git* /*node_modules/* .editorconfig README.md hash.txt'
+    - name: Put hash inside text file
+      run: |
+        shasum -a 1 release.zip > hash.txt
     - name: push changes to remote
       run: |
         git add -A
         git commit -m "New pack"
         git push --force
-    - name: Put hash inside text file
-      run: |
-        shasum -a 1 release.zip > hash.txt
