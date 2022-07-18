@@ -1,0 +1,24 @@
+{
+    "providers": [{
+            "type": "bitmap",
+            "file": "minecraft:icons/amog.png",
+            "height": 8,
+            "ascent": 7,
+            "chars": ["\uE929"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:icons/pstar.png",
+            "height": 8,
+            "ascent": 8,
+            "chars": ["\uE92A"]
+        },
+        {
+            "type": "bitmap",
+            "file": "minecraft:icons/bcs.png",
+            "height": 8,
+            "ascent": 7,
+            "chars": ["\uE92B"]
+        }
+    ]
+}
