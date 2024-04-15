@@ -22,8 +22,8 @@ jobs:
     - name: Put hash inside text file
       run: |
         HASH=$(sha1sum release.zip | grep -o '^[0-9a-z]*')
-        touch "$HASH"
-        echo "DATA" > "$HASH"
+        touch "$HASH.hash"
+        echo "DATA" > "$HASH.hash"
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
