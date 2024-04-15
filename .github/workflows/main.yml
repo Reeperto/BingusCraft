@@ -3,9 +3,10 @@
 name: Create Archive and Hash
 
 # Controls when the workflow will run
-on:
-  push: 
-    branches: [ main ]
+on: 
+  push:
+    tags:
+    - '*'
 
 jobs:
   build:
@@ -19,17 +20,16 @@ jobs:
         git config --global user.email "tooblecain@gmail.com"
         git config pull.rebase false
         git pull
-        rm -f release.zip
     - name: Archive Release
       uses: thedoctor0/zip-release@master
       with:
         filename: 'release.zip'
-        exclusions: '*.git* /*node_modules/* .editorconfig README.md hash.txt'
+        exclusions: '*.git*'
     - name: Put hash inside text file
       run: |
-        shasum -a 1 release.zip > hash.txt
-    - name: push changes to remote
-      run: |
-        git add -A
-        git commit -m "New pack"
-        git push --force
+        touch "$(shasum -a 256 release.zip | grep -o '^[0-9a-z]*').hash"
+    - name: Upload Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        artifacts: "release.zip, *.hash"
+        token: ${{ secrets.GITHUB_TOKEN }}
