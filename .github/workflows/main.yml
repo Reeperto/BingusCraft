@@ -21,10 +21,11 @@ jobs:
           pack_directory = '.'
           output_file_path = '/tmp/release.zip'
     - name: Get Pack Hash
+      id: pack_hash
       run: |
-        HASH=$(sha1sum /tmp/release.zip | grep -o "^[0-9a-z]*")
+        echo "HASH=$(sha1sum /tmp/release.zip | grep -o '^[0-9a-z]*')" >> $GITHUB_OUTPUT
     - name: Tag and create release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{github.run_number}}-${{ env.HASH }}
+        tag_name: ${{github.run_number}}-${{ steps.pack_hash.outputs.HASH }}
         files: /tmp/release.zip
