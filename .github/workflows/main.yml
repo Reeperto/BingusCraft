@@ -26,5 +26,5 @@ jobs:
     - name: Tag and create release
       uses: softprops/action-gh-release@v2
       with:
-        tag_name: ${{github.run_number}} - ${{ env.HASH }}
+        tag_name: ${{github.run_number}}-${{ env.HASH }}
         files: /tmp/release.zip
