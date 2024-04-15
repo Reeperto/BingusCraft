@@ -1,31 +1,58 @@
-# This is a basic workflow to help you get started with Actions
+name: Resourcepack Zipper
 
-name: Create Archive and Hash
-
-# Controls when the workflow will run
-on: 
+on:
   push:
-    tags:
-    - '*'
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Get Source
-      uses: actions/checkout@v3
-    - name: Archive Release
-      uses: thedoctor0/zip-release@master
+    - name: Checkout code
+      uses: actions/checkout@v2
       with:
-        filename: 'release.zip'
-        exclusions: '*.git*'
-    - name: Put hash inside text file
+        fetch-depth: 0 # A non-shallow repository clone is required
+
+    - name: Run PackSquash
+      uses: ComunidadAylas/PackSquash-action@v4
+      with:
+        packsquash_version: latest # Uses the latest PackSquash release supported by the action
+        shader_source_transformation_strategy: keep_as_is
+
+    - name: Create ZIP file
       run: |
-        HASH=$(sha1sum release.zip | grep -o '^[0-9a-z]*')
-        touch "$HASH.hash"
-        echo "DATA" > "$HASH.hash"
-    - name: Upload Release
-      uses: ncipollo/release-action@v1.12.0
+        COMMIT_ID=$(git rev-parse --short HEAD)
+        ZIP_NAME="release.zip"
+        echo "ZIP_NAME=${ZIP_NAME}" >> $GITHUB_ENV
+        zip -r "${ZIP_NAME}" .
+        ZIP_SHA1=$(sha1sum -a $ZIP_NAME | grep -o "^[0-9a-z]*")
+
+    - name: Upload ZIP artifact
+      uses: actions/upload-artifact@v2
       with:
-        artifacts: "release.zip, *.hash"
-        token: ${{ secrets.GITHUB_TOKEN }}
+        name: resource-pack-artifact
+        path: ${{ env.ZIP_NAME }}
+
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RESOURCE_ZIPPER }}
+      with:
+        tag_name: release-${{ env.ZIP_SHA1 }}
+        release_name: ${{ env.ZIP_SHA1 }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Artifact
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.RESOURCE_ZIPPER }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ${{ github.workspace }}/${{ env.ZIP_NAME }}
+        asset_name: ${{ env.ZIP_NAME }}
+        asset_content_type: application/zip
