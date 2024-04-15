@@ -21,9 +21,9 @@ jobs:
         exclusions: '*.git*'
     - name: Put hash inside text file
       run: |
-        HASH=$(shasum -a 256 release.zip | grep -o '^[0-9a-z]*')
-        touch "$HASH.hash"
-        echo "DATA" > "$HASH.hash"
+        HASH=$(sha1sum release.zip | grep -o '^[0-9a-z]*')
+        touch "$HASH"
+        echo "DATA" > "$HASH"
     - name: Upload Release
       uses: ncipollo/release-action@v1.12.0
       with:
